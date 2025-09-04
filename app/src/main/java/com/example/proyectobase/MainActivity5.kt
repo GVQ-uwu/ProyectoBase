@@ -19,6 +19,7 @@ class MainActivity5 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main5)
 
+
         val edMontoPesos:EditText = findViewById(R.id.ed_valor_pesos)
         val btnAccion:Button = findViewById(R.id.btn_accion)
         val txResultado:TextView = findViewById(R.id.tv_resultado)
