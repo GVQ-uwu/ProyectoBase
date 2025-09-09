@@ -27,31 +27,38 @@ class MainActivity : AppCompatActivity() {
         var usuarioBase = "ch.munozs"
         var passwBase = "admin123"
 
+        // Configuramos el evento click para el botón btnLogin
         btnLogin.setOnClickListener {
 
-            if(edUsername.text.toString() == usuarioBase
-                && edPasswd.text.toString() == passwBase){
+            // Comparamos el texto ingresado en edUsername y edPasswd con las credenciales base
+            if (edUsername.text.toString() == usuarioBase
+                && edPasswd.text.toString() == passwBase) {
 
-                // creo un objeto intent
+                // Creamos un objeto Intent para abrir la siguiente actividad (MainActivity2)
                 val nuevaVentana = Intent(this, MainActivity2::class.java)
-                /**
-                 * creo una variable, llamo al metodo putExtra(nombre_put, valor_variable)
-                 *
-                 */
 
-                var ses_username = edUsername.text.toString()
+                // Obtenemos el nombre de usuario ingresado para enviarlo a la siguiente actividad
+                val ses_username = edUsername.text.toString()
 
-                nuevaVentana.putExtra("sesion",ses_username )
-                nuevaVentana.putExtra("par_contrasena", edPasswd.text.toString() )                //abrimos el activity
+                // Agregamos datos extras al Intent para pasar información entre actividades
+                nuevaVentana.putExtra("sesion", ses_username)               // Enviamos el usuario
+                nuevaVentana.putExtra("par_contrasena", edPasswd.text.toString()) // Enviamos la contraseña
+
+                // Iniciamos la nueva actividad con el Intent configurado
                 startActivity(nuevaVentana)
 
-                val toast = Toast.makeText(this, "Bienvenid@s: "+ses_username, Toast.LENGTH_SHORT) // in Activity
+                // Mostramos un mensaje corto (Toast) de bienvenida al usuario
+                val toast = Toast.makeText(this, "Bienvenid@s: $ses_username", Toast.LENGTH_SHORT)
                 toast.show()
+
+                // Actualizamos el TextView txMensaje para indicar que el login fue exitoso
                 txMensaje.text = "login OK"
-            }else{
+            } else {
+                // Si las credenciales no coinciden, mostramos mensaje de error en txMensaje
                 txMensaje.text = "login NO"
             }
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
